@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "file_operations_mn"
+version = "0.0.1"
+authors = [
+  { name="Mike Nelhams", email="mikemnelhams@gmail.com" },
+]
+description = "A package for common file operations, so Mike can stop copying and pasting them between projects :)"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: GNU General Public License",
+]
+
+[project.urls]
+Homepage = "https://github.com/MikeMNelhams/file_operations/tree/main"
