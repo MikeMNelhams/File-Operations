@@ -2,6 +2,11 @@ from abc import ABC, abstractmethod
 import os
 import json
 
+from file_operations_mn.path_string_utilities import file_path_extension
+from file_operations_mn.file_utilities_write import make_empty_file
+from file_operations_mn.file_exceptions import InvalidPathError
+from file_operations_mn.printing_decorators import save_print_decorator, load_print_decorator
+
 
 class FileReader(ABC):
     def __init__(self, file_path: str, *args):
@@ -30,10 +35,12 @@ class FileReader(ABC):
         return None
 
     @abstractmethod
+    @save_print_decorator
     def save(self, data) -> None:
         raise NotImplementedError
 
     @abstractmethod
+    @load_print_decorator
     def load(self):
         raise NotImplementedError
 
@@ -62,3 +69,40 @@ class TXT_FileReader(FileReader):
         with open(self.file_path, 'r', encoding='utf-8') as f:
             content = f.read()
         return content
+
+
+class TextWriterSingleLine(FileReader):
+    def __init__(self, file_path: str):
+        super().__init__(file_path)
+        if not self.exists:
+            make_empty_file(file_path)
+
+    def load(self) -> str:
+        file_extension = file_path_extension(self.file_path)
+        if file_extension == ".txt":
+            return self.__load_text()
+        raise InvalidPathError(self.file_path)
+
+    @load_print_decorator
+    def load_safe(self):
+        if not self.exists:
+            return None
+
+        return self.load()
+
+    def save(self, data: str) -> None:
+        assert hasattr(data, "__repr__")
+        file_extension = file_path_extension(self.file_path)
+        if file_extension == ".txt":
+            self.__save_text(str(data))
+        return None
+
+    def __load_text(self) -> str:
+        with open(self.file_path, "r") as text_file:
+            data = text_file.read()
+        return data
+
+    def __save_text(self, data) -> None:
+        with open(self.file_path, "w") as text_file:
+            text_file.write(data)
+        return None

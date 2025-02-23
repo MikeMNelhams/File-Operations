@@ -43,6 +43,17 @@ def file_path_without_extension(file_path: str) -> str:
     return file_path[:-stop_index]
 
 
+def file_path_extension(file_path: str) -> str:
+    dot_index = -1
+    for index in range(len(file_path) - 1, -1, -1):
+        if file_path[index] == '.':
+            dot_index = index
+            break
+    if dot_index != -1:
+        return file_path[dot_index:]
+    raise InvalidPathError(file_path)
+
+
 def parent_path(path: str, parent_num: int=1) -> str:
     if len(path) <= 1:
         raise InvalidPathError(path)

@@ -20,7 +20,7 @@ def make_dir_if_not_exists(dir_path: str, parents=True) -> None:
         return None
 
     if dir_path[-1] != '/':
-        raise InvalidPathError
+        raise InvalidPathError(dir_path)
 
     Path(dir_path).mkdir(parents=parents, exist_ok=True)
     return None
