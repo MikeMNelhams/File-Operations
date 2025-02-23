@@ -54,7 +54,6 @@ class JSON_FileReader(FileReader):
 
 
 class TXT_FileReader(FileReader):
-
     def save(self, lines: list[str]) -> None:
         with open(self.file_path, 'w', encoding='utf-8') as f:
             f.writelines(lines)

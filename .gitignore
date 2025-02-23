@@ -8,5 +8,9 @@
 *.iml
 *.xml
 
+*.gz
+*.whl
+
 /shelf/
 /workspace.xml
+/src/file_operations_mn.egg-info/PKG-INFO
