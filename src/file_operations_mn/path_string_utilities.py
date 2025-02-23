@@ -15,6 +15,9 @@ def path_parent_dir(file_path: str) -> str:
 
 def is_path_of_extension(file_path: str, extension: str= '.txt') -> bool:
     """ Only checks the string, not that file exists"""
+    if len(extension) == 1:
+        raise InvalidPathError(f"The extension \'{extension}\' is invalid.")
+
     if len(file_path) <= len(extension):
         return False
 

@@ -52,6 +52,10 @@ class TestFilePathOfExtension(unittest.TestCase):
         with self.assertRaises(InvalidPathError):
             is_path_of_extension("test.csv", "csv")
 
+    def test_extension_is_only_dot_returns_path_error(self):
+        with self.assertRaises(InvalidPathError):
+            is_path_of_extension("test.", ".")
+
 
 class TestCountLines(unittest.TestCase):
     def test_blank1(self):
