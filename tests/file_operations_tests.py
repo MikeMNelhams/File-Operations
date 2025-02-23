@@ -2,11 +2,10 @@ import os
 import unittest
 
 
-from file_operations_mn.path_string_utilities import parent_path
+from file_operations_mn.path_string_utilities import parent_path, is_path_of_extension
 
-
-from file_operations_mn.file_utilities import (file_exists, is_path_of_extension, count_file_lines,
-                                                   trim_end_of_file_blank_line, files_in_dir, max_file_index_in_dir)
+from file_operations_mn.file_utilities_read import count_file_lines, max_file_index_in_dir, files_in_dir, file_exists
+from file_operations_mn.file_utilities_write import trim_end_of_file_blank_line, make_blank_file
 
 from file_operations_mn.file_exceptions import InvalidPathError
 
@@ -25,28 +24,6 @@ class TestTeardownFile:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.__delete()
-
-
-def make_blank_file(file_path: str, num_lines_non_blank: int, num_lines_blank: int) -> None:
-    if num_lines_non_blank == 0:
-        lines = ['\n' for _ in range(num_lines_blank - 1)]
-
-        with open(file_path, 'w') as out_file:
-            out_file.writelines(lines)
-
-        return None
-
-    lines = ["test\n" for _ in range(num_lines_non_blank - 1)]
-    if num_lines_non_blank > 1:
-        lines += "test"
-
-    if num_lines_blank > 0:
-        lines += ['\n' for _ in range(num_lines_blank)]
-
-    with open(file_path, 'w') as out_file:
-        out_file.writelines(lines)
-
-    return None
 
 
 class TestFilePathOfExtension(unittest.TestCase):
