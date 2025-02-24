@@ -42,3 +42,7 @@ def file_exists(file_path: str) -> bool:
     if len(file_path) < 2:
         return False
     return True
+
+
+def is_file_blank(file_path: str) -> bool:
+    return os.path.getsize(file_path) == 0
