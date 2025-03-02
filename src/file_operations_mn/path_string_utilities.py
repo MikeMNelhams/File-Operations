@@ -73,3 +73,22 @@ def parent_path(path: str, parent_num: int=1) -> str:
         return parent_path(parent_path_str, parent_num - 1)
 
     return parent_path_str
+
+
+def parent_dir_path(path: str) -> str:
+    if len(path) <= 1:
+        raise InvalidPathError(path)
+
+    start = 0
+    end = 0
+    for i, char in enumerate(reversed(path)):
+        if char == '/' or char == '\\':
+            if start != 0:
+                end = i
+                break
+            start = i + 1
+
+    parent_path_str = path
+    if end != 0:
+        parent_path_str = path[-end:-start]
+    return parent_path_str
