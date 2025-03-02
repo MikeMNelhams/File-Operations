@@ -75,7 +75,7 @@ def parent_path(path: str, parent_num: int=1) -> str:
     return parent_path_str
 
 
-def parent_dir_path(path: str) -> str:
+def path_parent_dir_only_parent(path: str) -> str:
     if len(path) <= 1:
         raise InvalidPathError(path)
 
