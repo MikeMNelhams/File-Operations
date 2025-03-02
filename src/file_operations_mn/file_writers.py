@@ -136,14 +136,14 @@ class CSV_Writer(FileReader):
         # Remove 1, due to the empty line @ EOF.
         return count_file_lines(self.file_path) - 1
 
-    def load(self, delimiter=',') -> list[list[str]]:
+    def load(self) -> list[list[str]]:
         with open(self.file_path, 'r') as file:
-            lines = [x for x in csv.reader(file, delimiter=delimiter)]
+            lines = [x for x in csv.reader(file, delimiter=self.delimiter)]
         return lines
 
     def save(self, data: list[list[str]]) -> None:
         with open(self.file_path, 'w') as file:
-            writer = csv.writer(file)
+            writer = csv.writer(file, delimiter=self.delimiter)
             writer.writerows(data)
         return None
 
