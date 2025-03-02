@@ -3,7 +3,8 @@ import unittest
 
 
 from file_operations_mn.path_string_utilities import parent_path, is_path_of_extension
-from file_operations_mn.file_utilities_read import count_file_lines, max_file_index_in_dir, files_in_dir, file_exists
+from file_operations_mn.file_utilities_read import (count_file_lines, max_file_index_in_dir, files_in_dir,
+                                                    file_exists, immediate_subdirs)
 from file_operations_mn.file_utilities_write import trim_end_of_file_blank_line, make_blank_file, make_empty_file
 from file_operations_mn.file_exceptions import InvalidPathError, FileEmptyError
 from file_operations_mn.file_writers import CSV_Writer
@@ -491,6 +492,9 @@ class DirectoryFunctions(unittest.TestCase):
     def test_maximum_index_correct(self):
         correct_max_index = 3
         self.assertEqual(correct_max_index, max_file_index_in_dir("test_directory"))
+
+    def test_immediate_subdirectories(self):
+        self.assertEqual({x for x in immediate_subdirs("test_directory")}, {"sub_dir1", "sub_dir2"})
 
 
 if __name__ == '__main__':

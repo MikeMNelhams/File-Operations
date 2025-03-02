@@ -46,3 +46,8 @@ def file_exists(file_path: str) -> bool:
 
 def is_file_blank(file_path: str) -> bool:
     return os.path.getsize(file_path) == 0
+
+
+def immediate_subdirs(dir_path: str) -> list[str]:
+    return tuple(os.walk(dir_path))[0][1]
+
