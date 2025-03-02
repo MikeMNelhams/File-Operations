@@ -11,13 +11,12 @@ def count_file_lines(file_path: str) -> int:
         return 1
 
     number_of_lines = sum(1 for line in data if line[-1] == '\n') + 1
-
     return number_of_lines
 
 
 def max_file_index_in_dir(directory_path: str, extension_type: str = '.txt') -> int:
     """ Assuming all files are named: 1.[ext] 2.[ext] ETC for any given extension, find the max number index name"""
-    assert is_path_dir(directory_path), NotADirectoryError
+    assert is_path_dir(directory_path), NotADirectoryError(directory_path)
     child_file_paths = os.listdir(directory_path)
     file_names = [file_path_without_extension(file_path) for file_path in child_file_paths
                   if is_path_of_extension(file_path, extension=extension_type)]
@@ -25,8 +24,8 @@ def max_file_index_in_dir(directory_path: str, extension_type: str = '.txt') -> 
     file_names = [int(file_name) for file_name in file_names if file_name.isnumeric()]
     if not file_names:
         return 0
-    maximum_index = max(file_names)
-    return maximum_index
+
+    return max(file_names)
 
 
 def files_in_dir(directory_path: str, extension: str = '.txt') -> list:
